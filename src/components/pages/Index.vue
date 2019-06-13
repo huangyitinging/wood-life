@@ -1,8 +1,7 @@
 <template>
     <div>
         <div class="gap-setting">
-            <div class="ind-banner"></div>
-
+            <Slider></Slider>
             <div class="types-wrap">
                 <router-link to="list" class="type-box">
                     <div class="pic pic1"></div>
@@ -29,6 +28,7 @@
 
 <script>
 import Card from '../Card';
+import Slider from '../IndexSlider';
 
 export default {
     data(){
@@ -38,6 +38,7 @@ export default {
     },
     components:{
         Card,
+        Slider,
     },
     methods:{
         getProduct(){
@@ -58,14 +59,6 @@ export default {
 
 <style lang="scss" scoped>
 // index
-.ind-banner{
-    width: 100%;
-    padding-bottom: 40%;
-    background-image: url(../../assets/images/ind-banner.jpg);
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
 .types-wrap{
     width: 90%;
     max-width: 900px;

@@ -2,6 +2,7 @@
     <div>
         <loading :active.sync="isLoading"></loading>
         <div class="gap-setting">
+            <div class="list-banner"><h1>商品列表</h1></div>
             <div class="regular-size clear-space pd-page">
                 <ul class="classify-board">
                     <li>
@@ -85,6 +86,23 @@ export default {
 
 <style lang="scss" scoped>
 // list
+.list-banner{
+    width: 100%;
+    height: 220px;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url(../../assets/images/banner.jpg);
+    h1{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        color: rgba(255,255,255,.8);
+
+    }
+}
 .classify-board{
     display: inline-block;
     vertical-align: top;

@@ -1,0 +1,63 @@
+<template>
+    <div>
+        <div class="swiper-container ind-banner-wrap">
+            <swiper :options="swiperOption" class="ind-banner-wrap">
+                <swiper-slide class="ind-banner pic1"></swiper-slide>
+                <swiper-slide class="ind-banner pic2"></swiper-slide>
+                <div class="swiper-pagination"  slot="pagination"></div>
+            </swiper>
+        </div>
+    </div>
+</template>
+
+<script>
+import 'swiper/dist/css/swiper.css'
+ 
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+ 
+export default {
+    name: 'carrousel',
+    data() {
+      return {
+        swiperOption: {
+            autoplay: {
+                delay: 5000,
+            },
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        }
+      }
+    },
+    components: {
+        swiper,
+        swiperSlide
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.ind-banner{
+    width: 100%;
+    padding-bottom: 40%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    &.pic1{
+        background-image: url('../assets/images/ind-banner.jpg');
+    }
+    &.pic2{
+        background-image: url('../assets/images/ind-banner2.jpg');
+    }
+}
+.swiper-pagination{
+    .swiper-pagination-bullet{
+        background: #fff;
+        opacity: 0.3;
+    }
+    .swiper-pagination-bullet-active{
+        background: #ffc67a;
+    }
+}
+</style>
