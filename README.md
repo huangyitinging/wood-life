@@ -1,4 +1,4 @@
-# vuecourse
+# WOOD LIFE
 
 > A Vue.js project
 

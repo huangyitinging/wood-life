@@ -52,14 +52,15 @@ export default {
         Card,
     },
     methods:{
-        getProducts(name){
+        getProducts(page = 1){
             const vm = this;
-            const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`;
+            const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
             vm.isLoading = true;
             this.$http.get(url).then((response) => {
+                console.log(response.data);
                 vm.products = response.data.products;
                 // 篩選
-                if( name === 'all' ){
+                if( vm.filterName === 'all' ){
                     vm.filteredProducts = Object.assign({}, vm.products);
                 }else{
                     vm.filteredProducts = vm.products.filter(function(item){
@@ -79,7 +80,7 @@ export default {
     },
     created(){
         const vm = this;
-        vm.getProducts(vm.filterName);
+        vm.getProducts();
     },
 }
 </script>

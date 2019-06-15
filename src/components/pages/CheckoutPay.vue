@@ -2,18 +2,23 @@
     <div>
         <loading :active.sync="isLoading"></loading>
         <div class="gap-setting">
-            <div class="my-5 row justify-content-center">
-                <form class="col-md-6" @submit.prevent="payOrder">
+            <div class="process-step clear-space">
+                <div class="step">1 填寫資訊</div>
+                <div class="step" :class="{'active': order.is_paid == false}">2 確認付款</div>
+                <div class="step" :class="{'active': order.is_paid}">3 完成訂單</div>
+            </div>
+            <div class="cart-frame">
+                <form class="col-md-12" @submit.prevent="payOrder">
                 <table class="table">
                     <thead>
                     <th>品名</th>
                     <th>數量</th>
-                    <th>單價</th>
+                    <th>小計</th>
                     </thead>
                     <tbody>
                     <tr v-for="item in order.products" :key="item.id">
                         <td class="align-middle">{{ item.product.title }}</td>
-                        <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
+                        <td class="align-middle">{{ item.qty }}</td>
                         <td class="align-middle text-right">{{ item.final_total }}</td>
                     </tr>
                     </tbody>
@@ -28,7 +33,7 @@
                 <table class="table">
                     <tbody>
                     <tr>
-                        <th width="100">Email</th>
+                        <th width="150">Email</th>
                         <td>{{ order.user.email }}</td>
                     </tr>
                     <tr>
@@ -52,11 +57,11 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="text-right" v-if="order.is_paid === false">
+                <div class="text-center" v-if="order.is_paid === false">
                     <button class="btn btn-danger" @click="payOrder">確認付款去</button>
                 </div>
                 <div class="text-center" v-if="order.is_paid === true">
-                    <router-link class="btn btn-info" to="/list">繼續逛逛</router-link>
+                    <router-link class="btn-sample" to="/list">繼續逛逛</router-link>
                 </div>
                 </form>
             </div>            

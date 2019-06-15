@@ -1,6 +1,14 @@
 <template>
     <header>
         <div class="regular-size">
+			<div class="hamburger-box" @click="openNav">
+				<div class="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
             <router-link class="h-logo" to="/">
                 <img src="../assets/images/logo.png" alt="">
             </router-link>
@@ -10,7 +18,7 @@
                         <router-link class="h-link" to="/list">商品列表</router-link>
                     </li>
                     <li>
-                        <router-link class="h-link" to="/product">我的訂單</router-link>
+                        <router-link class="h-link" to="/order">我的訂單</router-link>
                     </li>
                 </ul>
             </nav>
@@ -28,6 +36,8 @@
 </template>
 
 <script>
+import $ from 'jquery';
+
 export default {
     data(){
         return{
@@ -43,7 +53,10 @@ export default {
                 vm.cart = response.data.data.carts;
                 vm.isLoading = false;
             });   
-        },        
+        },       
+        openNav(){
+            $('.hamburger, .h-nav').toggleClass('open');
+        }, 
     },
     created(){
         const vm = this;

@@ -8,10 +8,11 @@ import CustomerCheckout from '@/components/pages/CustomerCheckout'
 import Orders from '@/components/pages/Orders'
 import Coupons from '@/components/pages/Coupons'
 
-// test
+// front
 import Home from '@/components/Home'
 import Index from '@/components/pages/Index'
 import List from '@/components/pages/List'
+import Order from '@/components/pages/Order'
 import Product from '@/components/pages/Product'
 import ShoppingCart from '@/components/pages/ShoppingCart'
 import Checkout from '@/components/pages/Checkout'
@@ -20,6 +21,14 @@ import CheckoutPay from '@/components/pages/CheckoutPay'
 Vue.use(Router)
 
 export default new Router({
+	// 切換路由時回到畫面頂部
+	scrollBehavior (to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition
+		} else {
+			return { x: 0, y: 0 }
+		}
+	},
   routes: [
     {
       path: '*',
@@ -38,6 +47,11 @@ export default new Router({
           path: 'list',
           name: 'List',
           component: List,
+        },  
+        {
+          path: 'order',
+          name: 'Order',
+          component: Order,
         }, 
         {
           path: 'product/:id', // 用動態路由去商品明細頁

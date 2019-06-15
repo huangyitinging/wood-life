@@ -1,8 +1,62 @@
 <template>
     <div>
         <div class="gap-setting">
-            <div class="my-5 row justify-content-center">
-                <form class="col-md-6" @submit.prevent="createOrder">
+            <div class="process-step clear-space">
+                <div class="step active">1 填寫資訊</div>
+                <div class="step">2 確認付款</div>
+                <div class="step">3 完成訂單</div>
+            </div>
+            <div class="cart-frame">
+                <div class="cart-table clear-space">
+                    <div class="tb-head">
+                        <div class="tb-first">
+                            <div class="field tb-img"></div>
+                            <div class="field tb-title">商品名稱</div>
+                        </div>
+                        <div class="tb-snd">
+                            <div class="field qty">數量</div>
+                        </div>
+                        <div class="tb-thd">
+                            <div class="field total">小計</div>
+                        </div>
+                    </div>
+                    <div class="tb-list" v-for="item in cart.carts" :key="item.id">
+                        <div class="tb-first">
+                            <div class="field tb-img">
+                                <div class="product-img" :style="{backgroundImage: `url(${item.product.imageUrl})`}"></div>
+                            </div>
+                            <div class="field tb-title">
+                                <div>{{ item.product.title }}</div>
+                                <div class="note color-focus" v-if="item.coupon">已套用優惠券</div>
+                            </div>
+                        </div>
+                        <div class="tb-snd">
+                            <div class="field qty">
+                                <span class="f-name">數量</span>
+                                <span class="f-txt">{{ item.qty }}</span>
+                            </div>
+                        </div>
+                        <div class="tb-thd">
+                            <div class="field total">
+                                <span class="f-name">小計</span>
+                                <span class="f-txt">{{ item.final_total | currency }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tb-foot">
+                        <div class="tb-final-title">總計</div>
+                        <div class="tb-price">{{ cart.total | currency }}</div>
+                    </div>
+                    <div class="tb-foot color-focus" v-if="cart.total != cart.final_total">
+                        <div class="tb-final-title">折扣價</div>
+                        <div class="tb-price">{{ cart.final_total | currency }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-frame">
+                <form class="col-md-12" @submit.prevent="createOrder">
+                    <p class="sc-title">收件人資訊</p>
                     <div class="form-group">
                     <label for="useremail">Email</label>
                     <input type="email" class="form-control" name="email" id="useremail"
@@ -37,10 +91,10 @@
                 
                     <div class="form-group">
                     <label for="comment">留言</label>
-                    <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"></textarea>
+                    <textarea name="" id="comment" class="form-control" cols="30" rows="5" v-model="form.message"></textarea>
                     </div>
-                    <div class="text-right">
-                    <button class="btn btn-success">送出訂單</button>
+                    <div class="text-center">
+                        <button class="btn-sample">送出訂單</button>
                     </div>
                 </form>
             </div>
@@ -52,6 +106,9 @@
 export default {
     data(){
         return{
+            cart:{
+                carts:[],
+            },
             form:{
                 user:{
                     name: '',
@@ -64,6 +121,16 @@ export default {
         };
     },
     methods: {
+        getCart(){
+            const vm = this;
+            const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+            vm.isLoading = true;
+            this.$http.get(url).then((response) => {
+                vm.cart = response.data.data;
+                console.log(response);
+                vm.isLoading = false;
+            });   
+        },
         createOrder(){
             const vm = this;
             const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
@@ -83,6 +150,9 @@ export default {
                 };
             });
         },        
+    },
+    created(){
+        this.getCart();
     },
 }
 </script>

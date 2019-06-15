@@ -1,9 +1,9 @@
 <template>
     <div>
         <form class="form-signin" @submit.prevent="signin">
-            <div class="mb-2">
+            <router-link class="mb-2" to="/">
               <img src="../../assets/images/logo.png" alt="" class="login-logo">
-            </div>
+            </router-link>
             <h1 class="h3 mb-3 font-weight-normal text-center">後台管理</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="email" id="inputEmail" v-model="user.username" class="form-control" placeholder="Email address" required autofocus>

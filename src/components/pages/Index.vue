@@ -3,7 +3,7 @@
         <div class="gap-setting">
             <Slider></Slider>
             <div class="types-wrap">
-                <router-link to="list" class="type-box">
+                <router-link to="list" class="type-box first">
                     <div class="pic pic1"></div>
                     <span class="type-name">餐具</span>
                 </router-link>
@@ -46,8 +46,8 @@ export default {
             const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`;
             this.$http.get(url).then((response) => {
                 let arry = response.data.products;
-                // 只取三筆資料
-                vm.list = arry.slice(4,7);
+                // 只取六筆資料
+                vm.list = arry.slice(3,9);
             });
         },
     },
@@ -119,5 +119,18 @@ export default {
 .item-list{
     margin: 20px auto;
     padding: 0 10px;
+}
+@media (max-width: 780px){
+.type-box{
+    width: calc((100% - 40px)/2);
+    margin-left: 0;
+    &.first{
+        display: block;
+        margin: 0 auto 15px;
+    }
+}  
+.type-box + .type-box{
+    margin: 0 10px ;
+}  
 }
 </style>

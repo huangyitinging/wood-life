@@ -42,3 +42,10 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.pagination{
+  margin: 25px 0;  
+  justify-content: center;
+}
+</style>

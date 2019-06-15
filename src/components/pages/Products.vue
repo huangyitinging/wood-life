@@ -38,6 +38,7 @@
         </table>
 
         <Pagination :pages="pagination" @emitPages="getProducts"></Pagination>
+        
         <!-- Modal -->
         <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
