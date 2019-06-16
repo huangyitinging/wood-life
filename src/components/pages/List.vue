@@ -52,9 +52,9 @@ export default {
         Card,
     },
     methods:{
-        getProducts(page = 1){
+        getProducts(){
             const vm = this;
-            const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
+            const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
             vm.isLoading = true;
             this.$http.get(url).then((response) => {
                 console.log(response.data);
