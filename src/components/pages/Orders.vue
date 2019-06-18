@@ -11,9 +11,8 @@
           <th>是否付款</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="orders.length">
         <tr v-for="(item, key) in sortOrder" :key="key"
-          v-if="orders.length"
           :class="{'text-secondary': !item.is_paid}">
           <td>{{ item.create_at | date }}</td>
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
