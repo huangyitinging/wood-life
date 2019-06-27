@@ -72,7 +72,7 @@ export default {
     methods:{
         getOrders(page = 1){
             const vm = this;
-            const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/orders?page=${page}`;
+            const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/orders?page=${page}`;
             vm.isLoading = true;
             this.$http.get(url).then((response) => {
                 console.log(response);
